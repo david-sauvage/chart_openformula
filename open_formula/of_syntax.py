@@ -1,5 +1,6 @@
-"""Module that permits to get a string compatible
-   with the syntax of open formula
+"""
+Module that permits to get a string compatible
+with the syntax of open formula
 """
 #Import from the Standard Library
 from re import compile, match
@@ -11,38 +12,35 @@ from of_class import Number, Cell, Range, CellReference, RangeReference, Column,
 function_name_pattern = compile("^[A-Za-z_.1-9]*$")
 
 def of_formula(intro, expression):
-    """Return the syntax for a formula
-       An open formula must begin with "of:"
+    """
+    Return the syntax for a formula
+    An open formula must begin with "of:"
     """
     return "of:"+intro+" "+expression
 
 def of_intro(forcerecalc=False):
-    """Return the syntax for an intro
-    """
+    """Return the syntax for an intro"""
     if forcerecalc:
         return "=="
     else:
         return "="
 
 def of_number(num):
-    """Verify that the argument is a  number and returns it in a string
-    """
+    """Verify that the argument is a  number and returns it in a string"""
     if type(num) in (int, long, float, Decimal):
         return Number(num)
     else:
         raise TypeError, 'Unknown type "%s"' % type(num)
 
 def of_string(string):
-    """Verify the argument is a string
-    """
+    """Verify the argument is a string"""
     if type(string)==str:
         return string
     else:
         raise TypeError, "Not a string"
 
 def of_function_name(name):
-    """Verify if name is valid for the openformula syntax
-    """
+    """Verify if name is valid for the openformula syntax"""
     if type(name) == str:
         if name[0].isalpha() and match(function_name_pattern, name) is not None:
             return name
@@ -52,13 +50,11 @@ def of_function_name(name):
         raise TypeError, "Not a string"
 
 def of_parameter_list(*parameters):
-    """Return the syntax for a parameter list
-    """
+    """Return the syntax for a parameter list"""
     return ' ; '.join(parameters)
 
 def of_reference(range_address, source=None):
-    """Return the syntax for a reference
-    """
+    """Return the syntax for a reference"""
     reference = range_address.str
     if source is not None:
         reference = source + " " +  reference
@@ -71,8 +67,7 @@ def of_reference(range_address, source=None):
         raise TypeError, "Not a Cell or Range"
 
 def of_column(col, blocked=False):
-    """Verify that col is an alphanumeric character and returns it
-    """
+    """Verify that col is an alphanumeric character and returns it"""
     if type(col) is str:
         if col.isalpha():
             if blocked:
@@ -85,8 +80,9 @@ def of_column(col, blocked=False):
         raise TypeError, "Not a string"
 
 def of_row(row, blocked=False):
-    """Verify that row is a number and returns it
-       in a string
+    """
+    Verify that row is a number and returns it
+    in a string
     """
     if type(row) is int:
         row = str(row)
@@ -103,15 +99,15 @@ def of_row(row, blocked=False):
         raise TypeError, "Not a string"
 
 def of_source(iri):
-    """Return the syntax for a source
-    """
+    """Return the syntax for a source"""
     if type(iri) is str:
         return "'"+iri+"'#"
     else:
         raise TypeError, "Not a string"
 
 def of_range_address(*args):
-    """Return the syntax for a range address. Examples:
+    """
+    Return the syntax for a range address. Examples:
 
     >>> of_range_address(col1, row1)
     >>> of_range_address(sheet1, col1, row1)
@@ -149,16 +145,13 @@ def of_range_address(*args):
 
 
 def of_reference_list(*references):
-    """Return the syntax for a reference list
-    """
+    """Return the syntax for a reference list"""
     return ' ~ '.join(references)
 
 def of_array(*matrix_rows):
-    """Return the syntax for an array
-    """
+    """Return the syntax for an array"""
     return "{" + "|".join(matrix_rows) + "}"
 
 def of_matrix_row(*expressions):
-    """Return the syntax for a matrix row
-    """
+    """Return the syntax for a matrix row"""
     return ";".join(expressions)

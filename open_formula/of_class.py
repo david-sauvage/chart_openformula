@@ -1,5 +1,6 @@
-"""Module with classes useful for open formula
-   These classes are used to see what types of string we have
+"""
+Module with classes useful for open formula
+These classes are used to see what types of string we have
 """
 class OFObject(object):
    def __init__(self, value):

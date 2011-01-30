@@ -8,15 +8,16 @@ from string import splitfields
 from os import getcwd
 from sys import path
 from os.path import exists
-
+    
 #
 #Chart
 #
 
 def odf_create_chart(chart_class, size=('10cm', '10cm'), title=None, subtitle=None, legend_position=None):
-    """Create a chart structure
+    """
+    Create a chart structure for basic use
     
-       Arguments
+    Arguments
          class -- 'line' 'area' 'circle' 'ring' 'scatter' 'radar'
                   'bar' 'stock' 'bubble' 'surface' 'gant'
          size -- (str, str)
@@ -40,6 +41,7 @@ def odf_create_chart(chart_class, size=('10cm', '10cm'), title=None, subtitle=No
 
 
 class odf_chart(odf_element):
+    """ This class implements an xml element that represents a chart"""
 #class
     def get_class(self):
         return self.get_attribute('chart:class')
@@ -47,7 +49,7 @@ class odf_chart(odf_element):
     def set_class(self, chart_class):
         """
         chart_class -- 'line' 'area' 'circle' 'ring' 'scatter' 'radar'
-                  'bar' 'stock' 'bubble' 'surface' 'gant'
+                       'bar' 'stock' 'bubble' 'surface' 'gant'
         """          
         self.set_attribute('chart:class', "chart:"+chart_class)
 
@@ -58,9 +60,7 @@ class odf_chart(odf_element):
         return (w, h)
 
     def set_size(self, w, h):
-        """
-        arguments -- str
-        """
+        """ arguments -- str """
         self.set_attribute('svg:width', w)
         self.set_attribute('svg:height', h)
 
@@ -69,9 +69,7 @@ class odf_chart(odf_element):
         return self.get_attribute('chart:style-name')
 
     def set_style(self, style):
-        """
-        style -- str
-        """
+        """ style -- str """
         self.set_attribute('chart:style-name', style)
 
 #title
@@ -83,9 +81,7 @@ class odf_chart(odf_element):
             return None
 
     def set_title(self, text):
-        """
-        text -- str
-        """
+        """ text -- str """
         elt_title = self.get_element('chart:title')
         if elt_title is None:
             elt_title = odf_create_element('chart:title')
@@ -100,9 +96,7 @@ class odf_chart(odf_element):
             return None
 
     def set_title_style(self, style):
-        """
-        style -- str
-        """
+        """ style -- str """
         elt_title = self.get_element('chart:title')
         if elt_title is None:
             elt_title = odf_create_element('chart:title')
@@ -119,9 +113,7 @@ class odf_chart(odf_element):
             return None
     
     def set_title_position(self, x, y):
-        """
-        arguments -- str
-        """
+        """ arguments -- str """
         elt_title = self.get_element('chart:title')
         if elt_title is None:
             elt_title = odf_create_element('chart:title')
@@ -138,9 +130,7 @@ class odf_chart(odf_element):
             return None
 
     def set_subtitle(self, text):
-        """
-        text -- str
-        """
+        """ text -- str """
         elt_subtitle = self.get_element('chart:subtitle')
         if elt_subtitle is None:
             elt_subtitle = odf_create_element('chart:subtitle')
@@ -155,9 +145,7 @@ class odf_chart(odf_element):
             return None
     
     def set_subtitle_style(self, style):
-        """
-        style -- str
-        """
+        """ style -- str """
         elt_subtitle = self.get_element('chart:subtitle')
         if elt_subtitle is None:
             elt_subtitle = odf_create_element('chart:subtitle')
@@ -174,9 +162,7 @@ class odf_chart(odf_element):
             return None
     
     def set_subtitle_position(self, x, y):
-        """
-        arguments -- str
-        """
+        """ arguments -- str """
         elt_subtitle = self.get_element('chart:subtitle')
         if elt_subtitle is None:
             elt_subtitle = odf_create_element('chart:subtitle')
@@ -194,9 +180,7 @@ class odf_chart(odf_element):
             return None
 
     def set_footer(self, text):
-        """
-        test -- str
-        """
+        """ test -- str """
         elt_footer = self.get_element('chart:footer')
         if elt_footer is None:
             elt_footer = odf_create_element('chart:footer')
@@ -211,9 +195,7 @@ class odf_chart(odf_element):
             return None
     
     def set_footer_style(self, style):
-        """
-        style -- str
-        """
+        """ style -- str """
         elt_footer = self.get_element('chart:footer')
         if elt_footer is None:
             elt_footer = odf_create_element('chart:footer')
@@ -230,9 +212,7 @@ class odf_chart(odf_element):
             return None
     
     def set_footer_position(self, x, y):
-        """
-        arguments -- str
-        """
+        """ arguments -- str """
         elt_footer = self.get_element('chart:footer')
         if elt_footer is None:
             elt_footer = odf_create_element('chart:footer')
@@ -262,9 +242,7 @@ class odf_chart(odf_element):
             return None
 
     def set_legend_alignment(self, align):
-        """
-        align -- 'start' 'center' 'end'
-        """
+        """ align -- 'start' 'center' 'end' """
         elt_legend = self.get_element('chart:legend')
         if elt_legend is None:
             elt_legend = odf_create_element('chart:legend')
@@ -279,9 +257,7 @@ class odf_chart(odf_element):
             return None
 
     def set_legend_style(self, style):
-        """
-        style -- str
-        """
+        """ style -- str """
         elt_legend = self.get_element('chart:legend')
         if elt_legend is None:
             elt_legend = odf_create_element('chart:legend')
@@ -305,23 +281,23 @@ def odf_create_plot_area(cell_range):
     return element
 
 class odf_plot_area(odf_element):
+    """
+    This class implements an xml element for a plot area used
+    to display the chart
+    """
 
     def get_cell_range_address(self):
         return self.get_attribute('table:cell-range-address')
 
     def set_cell_range_address(self, range_address):
-        """
-        range_address -- str like "Sheet1.A1:Sheet1.A10"
-        """
+        """ range_address -- str like "Sheet1.A1:Sheet1.A10" """
         self.set_attribute('table:cell-range-address', range_address)
 
     def get_style(self):
         return self.get_attribute('chart:style-name')
 
     def set_style(self, style):
-        """
-        style -- str
-        """
+        """ style -- str """
         self.set_attribute('chart:style-name', style)
 
     def get_position(self):
@@ -330,9 +306,7 @@ class odf_plot_area(odf_element):
         return (x, y)
 
     def set_position(self, x, y):
-        """
-        arguments -- str
-        """
+        """ arguments -- str """
         self.set_attribute('svg:x', x)
         self.set_attribute('svg:y', y)
 
@@ -342,28 +316,24 @@ class odf_plot_area(odf_element):
         return (w, h)
 
     def set_size(self, w, h):
-        """
-        arguments -- str
-        """
+        """ arguments -- str """
         self.set_attribute('svg:width', w)
         self.set_attribute('svg:height', h)
 
     def set_labels(self, value):
-        """
-           value -- 'none' 'column' 'row' 'both'
-        """
+        """ value -- 'none' 'column' 'row' 'both' """
         self.set_attribute('chart:data-source-has-labels', value)
 
     def get_labels(self):
         return self.get_attribute("chart:data-source-has-labels")
 
 #Axis
-#It might have three axis element so they are defined by their dimension
+#It might have three axis elements so they are defined by their dimension
     def set_axis(self, dimension, title=None, grid=None):
         """
-           dimension -- 'x' 'y' 'z'
-           title -- str
-           grid -- None 'major' 'minor'
+        dimension -- 'x' 'y' 'z'
+        title -- str
+        grid -- None 'major' 'minor'
         """
         axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
         if axis is None:
@@ -394,9 +364,7 @@ class odf_plot_area(odf_element):
         axis_title.set_text_content(title)   
 
     def get_axis_title(self, dimension):
-        """
-        dimension -- 'x' 'y' 'z'
-        """
+        """ dimension -- 'x' 'y' 'z' """
         axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
         if axis is not None:
             title = axis.get_element('chart:title')
@@ -408,9 +376,7 @@ class odf_plot_area(odf_element):
             return None
 
     def set_axis_title_style(self, dimension, style):
-        """
-        dimension -- 'x' 'y' 'z'
-        """
+        """ dimension -- 'x' 'y' 'z' """
         axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
         if axis is None:
             self.set_axis(dimension)
@@ -422,9 +388,7 @@ class odf_plot_area(odf_element):
         axis_title.set_attribute("chart:style-name", style)
 
     def get_axis_title_style(self, dimension):
-        """
-        dimension -- 'x' 'y' 'z'
-        """
+        """ dimension -- 'x' 'y' 'z' """
         axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
         if axis is not None:
             title = axis.get_element('chart:title')
@@ -448,9 +412,7 @@ class odf_plot_area(odf_element):
         axis_grid.set_attribute('chart:class', grid)
 
     def get_axis_grid(self, dimension):
-        """
-        dimension -- 'x' 'y' 'z'
-        """
+        """  dimension -- 'x' 'y' 'z' """
         axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
         if axis is not None:
             grid = axis.get_element('chart:grid')
@@ -462,9 +424,7 @@ class odf_plot_area(odf_element):
             return None
 
     def get_axis_style(self, dimension):
-        """
-        dimension -- 'x' 'y' 'z'
-        """
+        """ dimension -- 'x' 'y' 'z' """
         axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
         if axis is not None:
             return axis.get_attribute("chart:style-name")
@@ -483,9 +443,7 @@ class odf_plot_area(odf_element):
             raise "axis element not found"
 
     def get_grid_style(self, dimension):
-        """
-        dimension -- 'x' 'y' 'z'
-        """
+        """ dimension -- 'x' 'y' 'z' """
         axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
         if axis is not None:
             grid = axis.get_element('chart:grid')
@@ -527,9 +485,7 @@ class odf_plot_area(odf_element):
             raise "axis element not found"
 
     def get_categories(self, dimension):
-        """
-        dimension -- 'x' 'y' 'z'
-        """
+        """ dimension -- 'x' 'y' 'z' """
         axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
         if axis is not None:
             cat = axis.get_element("chart:categories")
@@ -544,9 +500,9 @@ class odf_plot_area(odf_element):
 #chart:series are defined with their values attribute        
     def set_chart_series(self, values, chart_class):
         """
-           values -- str like "Sheet1.A1:Sheet1.A2"
-           chart_class -- 'line' 'area' 'circle' 'ring' 'scatter' 'radar'
-                          'bar' 'stock' 'bubble' 'surface' 'gant'
+        values -- str like "Sheet1.A1:Sheet1.A2"
+        chart_class -- 'line' 'area' 'circle' 'ring' 'scatter' 'radar'
+                       'bar' 'stock' 'bubble' 'surface' 'gant'
         """
         series = self.get_element("chart:series[@chart:values-cell-range-address='"+values+"']")
         if series is None:
@@ -560,9 +516,7 @@ class odf_plot_area(odf_element):
         return [s.get_attribute("chart:values-cell-range-address") for s in series]
 
     def set_chart_series_style(self, values, style):
-        """
-        style -- str
-        """
+        """ style -- str """
         series = self.get_element("chart:series[@chart:values-cell-range-address='"+values+"']")
         if series is not None:
             series.set_attribute("chart:style-name", style)
@@ -577,9 +531,7 @@ class odf_plot_area(odf_element):
             return None
 
     def set_chart_series_label(self, values, label):
-        """
-        label -- str
-        """
+        """ label -- str """
         series = self.get_element("chart:series[@chart:values-cell-range-address='"+values+"']")
         if series is not None:
             series.set_attribute("chart:label-cell-address", label)
@@ -594,9 +546,7 @@ class odf_plot_area(odf_element):
             return None
         
     def set_chart_series_domain(self, values, cell_range):
-        """
-        cell_range -- str like 'Sheet1.A1:Sheet.A10'
-        """
+        """ cell_range -- str like 'Sheet1.A1:Sheet.A10' """
         series = self.get_element("chart:series[@chart:values-cell-range-address='"+values+"']")
         if series is not None:
             domain = odf_create_element('chart:domain')
@@ -614,9 +564,7 @@ class odf_plot_area(odf_element):
 
 #Floor
     def set_floor(self, width=None, style=None):
-        """
-        arguments -- str
-        """
+        """ arguments -- str """
         floor = self.get_element("chart:floor")
         if floor is None:
             floor = odf_create_element('chart:floor')
@@ -644,9 +592,7 @@ class odf_plot_area(odf_element):
 
 #Wall
     def set_wall(self, width=None, style=None):
-        """
-        arguments -- str
-        """
+        """ arguments -- str """
         wall = self.get_element("chart:wall")
         if wall is None:
             wall = odf_create_element('chart:wall')
@@ -724,15 +670,17 @@ class odf_plot_area(odf_element):
 ###
 
 def create_simple_chart(chart_type, cell_range, chart_title=None, data_in_columns=True, legend="none", x_labels="none"):
-    """Create a complete chart element for basics chart creation
-       legend and x_labels allows user to inform that the first row (or column) contain legend (or x_labels) data       
+    """
+    Create a complete chart element for basics chart creation
+    Legend and x_labels allows user to inform that the first row
+    (or column) contain legend (or x_labels) data       
 
-       chart_type -- 'line' 'area' 'circle' 'ring' 'scatter' 'radar'
-                          'bar' 'stock' 'bubble' 'surface' 'gant'
-       cell_range -- str like 'Sheet.A1:Sheet.D5'
-       chart_title -- str
-       data_in_columns -- boolean 
-       legend, x_labels -- 'none' 'column' 'row'
+    chart_type -- 'line' 'area' 'circle' 'ring' 'scatter' 'radar'
+                  'bar' 'stock' 'bubble' 'surface' 'gant'
+    cell_range -- str like 'Sheet.A1:Sheet.D5'
+    chart_title -- str
+    data_in_columns -- boolean 
+    legend, x_labels -- 'none' 'column' 'row'
     """
     
     chart = odf_create_chart(chart_type, title=chart_title, legend_position='bottom')
@@ -776,10 +724,11 @@ def create_simple_chart(chart_type, cell_range, chart_title=None, data_in_column
 #Useful functions
 ###
 def split_range(cell_range, legend="row", x_labels="column"):
-    """returns a dictionnary with data_range, legend_range and labels for the x-axis
+    """
+    returns a dictionnary with data_range, legend_range and labels for the x-axis
 
-       cell_range - str like Sheet.A1:SheetD5
-       legend, x_labels - 'none', 'row', 'column'
+    cell_range - str like Sheet.A1:SheetD5
+    legend, x_labels - 'none', 'row', 'column'
     """
 
     my_dict = {"data":cell_range, "legend":"", "labels":""}
@@ -826,10 +775,11 @@ def split_range(cell_range, legend="row", x_labels="column"):
     
 
 def divide_range(cell_range, by="columns"):
-    """Returns a list of cell range (string) divided in columns or rows
+    """
+    Returns a list of cell range (string) divided in columns or rows
 
-       cell_range -- str like Sheet.A1:Sheet.C5
-       by -- 'columns' 'rows'
+    cell_range -- str like Sheet.A1:Sheet.C5
+    by -- 'columns' 'rows'
     """
     my_list = []
     sheet1=splitfields(splitfields(cell_range, ":")[0],".")[0]
@@ -860,8 +810,7 @@ def divide_range(cell_range, by="columns"):
         raise AttributeError
 
 def add_chart_structure_in_document(document):
-    """Search the .otc template installed and put xml files in document
-    """
+    """Search the .otc template installed and put xml files in document """
     #We search the template
     my_template = ""
     for p in path:
@@ -902,9 +851,10 @@ def add_chart_structure_in_document(document):
     return name
 
 def attach_chart_to_cell(name_obj, cell):
-    """create a frame in 'cell' in order to display the chart 'name_obj'
-       name_obj - str
-       cell - odf_cell
+    """
+    create a frame in 'cell' in order to display the chart 'name_obj'
+    name_obj - str
+    cell - odf_cell
     """
     #We need a frame
     frame = odf_create_frame(size=("10cm", "10cm"))
@@ -920,6 +870,8 @@ def attach_chart_to_cell(name_obj, cell):
     cell.append(frame)
 
     return cell
+
+
 
 #register
 register_element_class('chart:chart', odf_chart)
