@@ -1,5 +1,7 @@
 import unittest
-from chart import odf_create_chart, odf_create_plot_area, create_simple_chart, add_chart_structure_in_document, attach_chart_to_cell, divide_range, split_range
+from chart import odf_create_chart, odf_create_plot_area, create_simple_chart
+from chart import add_chart_structure_in_document, attach_chart_to_cell
+from chart import divide_range, split_range
 from lpod.table import  odf_create_cell
 from lpod.document import odf_new_document
 from lpod.xmlpart import odf_xmlpart

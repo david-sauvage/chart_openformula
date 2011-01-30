@@ -10,8 +10,15 @@ from lpod.table import odf_create_table, odf_create_row, odf_create_cell, _digit
 from lpod.xmlpart import odf_xmlpart
 
 #import lpod_vle
-from lpod_chart.chart_style import odf_create_chart_title_style, odf_create_chart_legend_style, odf_create_chart_plot_area_style, odf_create_chart_axis_style, odf_create_chart_axis_title_style, odf_create_chart_wall_style, odf_create_chart_style
-from lpod_chart.chart import create_simple_chart, attach_chart_to_cell, divide_range, add_chart_structure_in_document
+from lpod_chart.chart_style import odf_create_chart_title_style 
+from lpod_chart.chart_style import odf_create_chart_legend_style
+from lpod_chart.chart_style import odf_create_chart_plot_area_style
+from lpod_chart.chart_style import odf_create_chart_axis_style
+from lpod_chart.chart_style import odf_create_chart_axis_title_style
+from lpod_chart.chart_style import odf_create_chart_wall_style
+from lpod_chart.chart_style import odf_create_chart_style
+from lpod_chart.chart import create_simple_chart, attach_chart_to_cell, divide_range
+from lpod_chart.chart import add_chart_structure_in_document
 
 palette=['#0000ff', '#bf00ff', '#ff0080', '#ff4000', '#ffff00', '#40ff00', '#00ff7f', '#00bfff', '#6000ff', '#ff00df', '#ff0020', '#ff9f00', '#9fff00', '#00ff20', '#00ffdf', '#0060ff']
 
@@ -203,5 +210,5 @@ if (len(sys.argv) > 2):
 else:
     print "Two arguments needed :"
     print "You have to give file with the data for gantt and the ods output"
-    print "example : example.py ./gantt_example_data out.ods"
+    print "example : gantt_example.py gantt_example_data out.ods"
         

@@ -2,7 +2,9 @@ import unittest
 
 from decimal import Decimal
 from of_class import Number, Cell, Range
-from of_syntax import of_formula, of_intro, of_number, of_string, of_function_name, of_parameter_list, of_reference, of_column, of_row, of_source, of_range_address, of_reference_list, of_array, of_matrix_row
+from of_syntax import of_formula, of_intro, of_number, of_string, of_function_name
+from of_syntax import of_parameter_list, of_reference, of_column, of_row, of_source
+from of_syntax import of_range_address, of_reference_list, of_array, of_matrix_row
 
 class TestOpenFormulaSyntax(unittest.TestCase):
     

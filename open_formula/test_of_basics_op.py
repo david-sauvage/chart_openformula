@@ -1,7 +1,9 @@
 import unittest
 
 from of_class import CellReference, Number
-from of_basics_op import of_add, of_substract, of_multiply, of_divide, of_concatenate, of_equal, of_different, of_upper, of_lower, of_upper_equal, of_lower_equal
+from of_basics_op import of_add, of_substract, of_multiply, of_divide
+from of_basics_op import of_concatenate, of_equal, of_different, of_upper
+from of_basics_op import of_lower, of_upper_equal, of_lower_equal
 
 class TestOpenFormulaBasicsOp(unittest.TestCase):
     
