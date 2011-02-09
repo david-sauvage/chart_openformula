@@ -13,7 +13,9 @@ from os.path import exists
 #Chart
 #
 
-def odf_create_chart(chart_class, size=('10cm', '10cm'), title=None, subtitle=None, legend_position=None):
+def odf_create_chart(chart_class, size=('10cm', '10cm'), title=None,
+				subtitle=None, legend_position=None):
+
     """
     Create a chart structure for basic use
     
@@ -335,7 +337,9 @@ class odf_plot_area(odf_element):
         title -- str
         grid -- None 'major' 'minor'
         """
-        axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	axis = self.get_element("//chart:axis[@chart:dimension='" + dimension +
+                                                                          "']")
+
         if axis is None:
             axis = odf_create_element('chart:axis')
             axis.set_attribute("chart:dimension", dimension)
@@ -353,10 +357,14 @@ class odf_plot_area(odf_element):
         dimension -- 'x' 'y' 'z'
         title -- str
         """
-        axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	axis = self.get_element("//chart:axis[@chart:dimension='" + dimension +
+                                                                          "']")
+
         if axis is None:
             self.set_axis(dimension)
-            axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	    axis = self.get_element("//chart:axis[@chart:dimension='" +
+                                                              dimension + "']")
+
         axis_title = axis.get_element('chart:title')
         if axis_title is None:
             axis_title = odf_create_element('chart:title')
@@ -365,7 +373,9 @@ class odf_plot_area(odf_element):
 
     def get_axis_title(self, dimension):
         """ dimension -- 'x' 'y' 'z' """
-        axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	axis = self.get_element("//chart:axis[@chart:dimension='" + dimension +
+                                                                          "']")
+
         if axis is not None:
             title = axis.get_element('chart:title')
             if title is not None:
@@ -377,10 +387,14 @@ class odf_plot_area(odf_element):
 
     def set_axis_title_style(self, dimension, style):
         """ dimension -- 'x' 'y' 'z' """
-        axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	axis = self.get_element("//chart:axis[@chart:dimension='" + dimension +
+                                                                          "']")
+
         if axis is None:
             self.set_axis(dimension)
-            axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	    axis = self.get_element("//chart:axis[@chart:dimension='" +
+                                                              dimension + "']")
+
         axis_title = axis.get_element('chart:title')
         if axis_title is None:
             axis_title = odf_create_element('chart:title')
@@ -389,7 +403,9 @@ class odf_plot_area(odf_element):
 
     def get_axis_title_style(self, dimension):
         """ dimension -- 'x' 'y' 'z' """
-        axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	axis = self.get_element("//chart:axis[@chart:dimension='" + dimension +
+                                                                          "']")
+
         if axis is not None:
             title = axis.get_element('chart:title')
             if title is not None:
@@ -404,7 +420,9 @@ class odf_plot_area(odf_element):
         dimension -- 'x' 'y' 'z'
         grid -- 'major' 'minor'
         """
-        axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	axis = self.get_element("//chart:axis[@chart:dimension='" + dimension +
+                                                                          "']")
+
         axis_grid = axis.get_element('chart:grid')
         if axis_grid is None:
             axis_grid = odf_create_element('chart:grid')
@@ -413,7 +431,9 @@ class odf_plot_area(odf_element):
 
     def get_axis_grid(self, dimension):
         """  dimension -- 'x' 'y' 'z' """
-        axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	axis = self.get_element("//chart:axis[@chart:dimension='" + dimension +
+                                                                          "']")
+
         if axis is not None:
             grid = axis.get_element('chart:grid')
             if grid is not None:
@@ -425,7 +445,9 @@ class odf_plot_area(odf_element):
 
     def get_axis_style(self, dimension):
         """ dimension -- 'x' 'y' 'z' """
-        axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	axis = self.get_element("//chart:axis[@chart:dimension='" + dimension +
+                                                                          "']")
+
         if axis is not None:
             return axis.get_attribute("chart:style-name")
         else:
@@ -436,7 +458,9 @@ class odf_plot_area(odf_element):
         style -- str
         dimension -- 'x' 'y' 'z'
         """
-        axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	axis = self.get_element("//chart:axis[@chart:dimension='" + dimension +
+                                                                          "']")
+
         if axis is not None:
             axis.set_attribute("chart:style-name", style)
         else:
@@ -444,7 +468,9 @@ class odf_plot_area(odf_element):
 
     def get_grid_style(self, dimension):
         """ dimension -- 'x' 'y' 'z' """
-        axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	axis = self.get_element("//chart:axis[@chart:dimension='" + dimension +
+                                                                          "']")
+
         if axis is not None:
             grid = axis.get_element('chart:grid')
             if grid is not None:
@@ -459,7 +485,9 @@ class odf_plot_area(odf_element):
         style -- str
         dimension -- 'x' 'y' 'z'
         """
-        axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	axis = self.get_element("//chart:axis[@chart:dimension='" + dimension +
+                                                                          "']")
+
         if axis is not None:
             grid = axis.get_element('chart:grid')
             if grid is not None:
@@ -474,7 +502,9 @@ class odf_plot_area(odf_element):
         dimension -- 'x' 'y' 'z'
         range_address -- str
         """
-        axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	axis = self.get_element("//chart:axis[@chart:dimension='" + dimension +
+                                                                          "']")
+
         if axis is not None:
             cat = axis.get_element("chart:categories")
             if cat is None:
@@ -486,7 +516,9 @@ class odf_plot_area(odf_element):
 
     def get_categories(self, dimension):
         """ dimension -- 'x' 'y' 'z' """
-        axis = self.get_element("//chart:axis[@chart:dimension='"+dimension+"']")
+	axis = self.get_element("//chart:axis[@chart:dimension='" + dimension +
+                                                                          "']")
+
         if axis is not None:
             cat = axis.get_element("chart:categories")
             if cat is not None:
@@ -504,7 +536,10 @@ class odf_plot_area(odf_element):
         chart_class -- 'line' 'area' 'circle' 'ring' 'scatter' 'radar'
                        'bar' 'stock' 'bubble' 'surface' 'gant'
         """
-        series = self.get_element("chart:series[@chart:values-cell-range-address='"+values+"']")
+	series = \
+	    self.get_element("chart:series[@chart:values-cell-range-address='"
+                                                              + values + "']")
+
         if series is None:
             series = odf_create_element('chart:series')
             series.set_attribute('chart:values-cell-range-address', values) 
@@ -513,18 +548,26 @@ class odf_plot_area(odf_element):
 
     def get_chart_series_values(self):
         series = self.get_elements("//chart:series")
-        return [s.get_attribute("chart:values-cell-range-address") for s in series]
+	return [s.get_attribute("chart:values-cell-range-address") for s in
+                                                                       series]
+
 
     def set_chart_series_style(self, values, style):
         """ style -- str """
-        series = self.get_element("chart:series[@chart:values-cell-range-address='"+values+"']")
+	series = \
+	     self.get_element("chart:series[@chart:values-cell-range-address='"
+                                                               + values + "']")
+
         if series is not None:
             series.set_attribute("chart:style-name", style)
         else:
             raise "Series Element not found"
 
     def get_chart_series_style(self, values):
-        series = self.get_element("chart:series[@chart:values-cell-range-address='"+values+"']")
+	series = \
+	      self.get_element("chart:series[@chart:values-cell-range-address='"
+                                                                + values + "']")
+
         if series is not None:
             return series.get_attribute("chart:style-name")
         else:
@@ -532,14 +575,20 @@ class odf_plot_area(odf_element):
 
     def set_chart_series_label(self, values, label):
         """ label -- str """
-        series = self.get_element("chart:series[@chart:values-cell-range-address='"+values+"']")
+	series = \
+	      self.get_element("chart:series[@chart:values-cell-range-address='"
+                                                                + values + "']")
+
         if series is not None:
             series.set_attribute("chart:label-cell-address", label)
         else:
             raise "Series Element not found"
 
     def get_chart_series_label(self, values):
-        series = self.get_element("chart:series[@chart:values-cell-range-address='"+values+"']")
+	series = \
+	      self.get_element("chart:series[@chart:values-cell-range-address='"
+                                                                + values + "']")
+
         if series is not None:
             return series.get_attribute("chart:label-cell-address")
         else:
@@ -547,7 +596,10 @@ class odf_plot_area(odf_element):
         
     def set_chart_series_domain(self, values, cell_range):
         """ cell_range -- str like 'Sheet1.A1:Sheet.A10' """
-        series = self.get_element("chart:series[@chart:values-cell-range-address='"+values+"']")
+	series = \
+	      self.get_element("chart:series[@chart:values-cell-range-address='"
+                                                                + values + "']")
+
         if series is not None:
             domain = odf_create_element('chart:domain')
             domain.set_attribute("table:cell-range-address", cell_range)
@@ -556,7 +608,10 @@ class odf_plot_area(odf_element):
             raise "Series Element not found"
 
     def get_chart_series_domain(self, values):
-        domain = self.get_element("chart:series[@chart:values-cell-range-address='"+values+"']/chart:domain")
+	domain = \
+	      self.get_element("chart:series[@chart:values-cell-range-address='"
+                                                   + values + "']/chart:domain")
+
         if domain is not None:
             return domain.get_attribute("table:cell-range-address")
         else:
@@ -669,7 +724,8 @@ class odf_plot_area(odf_element):
 #Quick charts
 ###
 
-def create_simple_chart(chart_type, cell_range, chart_title=None, data_in_columns=True, legend="none", x_labels="none"):
+def create_simple_chart(chart_type, cell_range, chart_title=None,
+		data_in_columns=True, legend="none", x_labels="none"):
     """
     Create a complete chart element for basics chart creation
     Legend and x_labels allows user to inform that the first row
@@ -683,7 +739,9 @@ def create_simple_chart(chart_type, cell_range, chart_title=None, data_in_column
     legend, x_labels -- 'none' 'column' 'row'
     """
     
-    chart = odf_create_chart(chart_type, title=chart_title, legend_position='bottom')
+    chart = odf_create_chart(chart_type, title=chart_title,
+                                                      legend_position='bottom')
+
     po = odf_create_plot_area(cell_range)
     po.set_axis('x')
     po.set_axis('y', grid='minor')
@@ -725,7 +783,8 @@ def create_simple_chart(chart_type, cell_range, chart_title=None, data_in_column
 ###
 def split_range(cell_range, legend="row", x_labels="column"):
     """
-    returns a dictionnary with data_range, legend_range and labels for the x-axis
+    returns a dictionnary with data_range, legend_range and labels for the
+    x-axis
 
     cell_range - str like Sheet.A1:SheetD5
     legend, x_labels - 'none', 'row', 'column'
@@ -741,35 +800,77 @@ def split_range(cell_range, legend="row", x_labels="column"):
     tmp_coord2 = _get_cell_coordinates(cell2)
 
     #we need the coordinate in a crescent order
-    coord1 = (min(tmp_coord1[0], tmp_coord2[0]),min(tmp_coord1[1], tmp_coord2[1]))
-    coord2 = (max(tmp_coord1[0], tmp_coord2[0]),max(tmp_coord1[1], tmp_coord2[1]))
+    coord1 = (min(tmp_coord1[0], tmp_coord2[0]),min(tmp_coord1[1],
+                                                                tmp_coord2[1]))
+
+    coord2 = (max(tmp_coord1[0], tmp_coord2[0]),max(tmp_coord1[1],
+                                                                tmp_coord2[1]))
+
 
     if legend is not 'none' and x_labels is not 'none':
         #if we have both conditions, we have to delete the first cell
         if legend == "row":
-            my_dict["legend"] = sheet1+"."+_digit_to_alpha(coord1[0]+1)+str(coord1[1]+1)+":"+sheet2+"."+_digit_to_alpha(coord2[0])+str(coord1[1]+1)
-        elif legend == "column":
-            my_dict["legend"] = sheet1+"."+_digit_to_alpha(coord1[0])+str(coord1[1]+2)+":"+sheet2+"."+_digit_to_alpha(coord1[0])+str(coord2[1]+1)
-        if x_labels == "row":
-            my_dict["labels"] = sheet1+"."+_digit_to_alpha(coord1[0]+1)+str(coord1[1]+1)+":"+sheet2+"."+_digit_to_alpha(coord2[0])+str(coord1[1]+1)
-        elif x_labels == "column":
-            my_dict["labels"] = sheet1+"."+_digit_to_alpha(coord1[0])+str(coord1[1]+2)+":"+sheet2+"."+_digit_to_alpha(coord1[0])+str(coord2[1]+1)
+	    my_dict["legend"] = sheet1 + "." + _digit_to_alpha(coord1[0]+1) + \
+			        str(coord1[1]+1) + ":"+sheet2 + "." + \
+                                _digit_to_alpha(coord2[0]) + str(coord1[1]+1)
 
-        my_dict["data"] = sheet1+"."+_digit_to_alpha(coord1[0]+1)+str(coord1[1]+2)+":"+sheet2+"."+_digit_to_alpha(coord2[0])+str(coord2[1]+1)
+        elif legend == "column":
+	    my_dict["legend"] = sheet1 + "." + _digit_to_alpha(coord1[0]) + \
+				str(coord1[1]+2) + ":"+sheet2 + "." + \
+                                _digit_to_alpha(coord1[0]) + str(coord2[1]+1) 
+
+        if x_labels == "row":
+	    my_dict["labels"] = sheet1 + "." + _digit_to_alpha(coord1[0]+1) + \
+				str(coord1[1]+1) + ":"+sheet2 + "." + \
+                                _digit_to_alpha(coord2[0]) + str(coord1[1]+1)
+
+        elif x_labels == "column":
+	    my_dict["labels"] = sheet1 + "." + _digit_to_alpha(coord1[0]) + \
+				str(coord1[1]+2) + ":"+sheet2 + "." + \
+                                _digit_to_alpha(coord1[0]) + str(coord2[1]+1)
+
+
+	my_dict["data"] = sheet1 + "." + _digit_to_alpha(coord1[0]+1) + \
+			  str(coord1[1]+2) + ":"+sheet2 + "." + \
+                          _digit_to_alpha(coord2[0]) + str(coord2[1]+1)
 
     else:
         if legend == "row":
-            my_dict["legend"] = sheet1+"."+_digit_to_alpha(coord1[0])+str(coord1[1]+1)+":"+sheet2+"."+_digit_to_alpha(coord2[0])+str(coord1[1]+1)
-            my_dict["data"] = sheet1+"."+_digit_to_alpha(coord1[0])+str(coord1[1]+2)+":"+sheet2+"."+_digit_to_alpha(coord2[0])+str(coord2[1]+1)
+	    my_dict["legend"] = sheet1 + "." + _digit_to_alpha(coord1[0]) + \
+				str(coord1[1]+1) + ":"+sheet2 + "." + \
+                                _digit_to_alpha(coord2[0]) + str(coord1[1]+1)
+
+	    my_dict["data"] = sheet1 + "." + _digit_to_alpha(coord1[0]) + \
+			      str(coord1[1]+2) + ":" + sheet2 + "." + \
+                              _digit_to_alpha(coord2[0]) + str(coord2[1]+1)
+
         elif legend == "column":
-            my_dict["legend"] = sheet1+"."+_digit_to_alpha(coord1[0])+str(coord1[1]+1)+":"+sheet2+"."+_digit_to_alpha(coord1[0])+str(coord2[1]+1)
-            my_dict["data"] = sheet1+"."+_digit_to_alpha(coord1[0]+1)+str(coord1[1]+1)+":"+sheet2+"."+_digit_to_alpha(coord2[0])+str(coord2[1]+1)
+	    my_dict["legend"] = sheet1 + "." + _digit_to_alpha(coord1[0]) + \
+				str(coord1[1]+1) + ":"+sheet2 + "." + \
+                                _digit_to_alpha(coord1[0]) + str(coord2[1]+1)
+
+	    my_dict["data"] = sheet1 + "." + _digit_to_alpha(coord1[0]+1) + \
+			      str(coord1[1]+1) + ":"+sheet2 + \
+                              "."+_digit_to_alpha(coord2[0]) + str(coord2[1]+1)
+
         if x_labels == "row":
-            my_dict["labels"] = sheet1+"."+_digit_to_alpha(coord1[0])+str(coord1[1]+1)+":"+sheet2+"."+_digit_to_alpha(coord2[0])+str(coord1[1]+1)
-            my_dict["data"] = sheet1+"."+_digit_to_alpha(coord1[0])+str(coord1[1]+2)+":"+sheet2+"."+_digit_to_alpha(coord2[0])+str(coord2[1]+1)
+	    my_dict["labels"] = sheet1 + "." + _digit_to_alpha(coord1[0]) + \
+				str(coord1[1]+1) + ":" + sheet2 + "." + \
+                                _digit_to_alpha(coord2[0]) + str(coord1[1]+1)
+
+	    my_dict["data"] = sheet1 + "." + _digit_to_alpha(coord1[0]) + \
+			      str(coord1[1]+2) + ":"+sheet2 + "." + \
+                              _digit_to_alpha(coord2[0]) + str(coord2[1]+1)
+
         elif x_labels == "column":
-            my_dict["labels"] =  sheet1+"."+_digit_to_alpha(coord1[0])+str(coord1[1]+1)+":"+sheet2+"."+_digit_to_alpha(coord1[0])+str(coord2[1]+1)
-            my_dict["data"] = sheet1+"."+_digit_to_alpha(coord1[0]+1)+str(coord1[1]+1)+":"+sheet2+"."+_digit_to_alpha(coord2[0])+str(coord2[1]+1)
+	    my_dict["labels"] = sheet1 + "." + _digit_to_alpha(coord1[0]) + \
+				str(coord1[1]+1) + ":"+sheet2 + "." + \
+                                _digit_to_alpha(coord1[0]) + str(coord2[1]+1)
+
+	    my_dict["data"] = sheet1 + "."+ _digit_to_alpha(coord1[0]+1) + \
+			      str(coord1[1]+1) + ":"+sheet2 + "." + \
+                              _digit_to_alpha(coord2[0]) + str(coord2[1]+1)
+
 
     return my_dict
     
@@ -791,18 +892,28 @@ def divide_range(cell_range, by="columns"):
     tmp_coord2 = _get_cell_coordinates(cell2)
 
     #we need the coordinate in a crescent order
-    coord1 = (min(tmp_coord1[0], tmp_coord2[0]),min(tmp_coord1[1], tmp_coord2[1]))
-    coord2 = (max(tmp_coord1[0], tmp_coord2[0]),max(tmp_coord1[1], tmp_coord2[1]))
+    coord1 = (min(tmp_coord1[0], tmp_coord2[0]),min(tmp_coord1[1],
+                                                                tmp_coord2[1]))
+
+    coord2 = (max(tmp_coord1[0], tmp_coord2[0]),max(tmp_coord1[1],
+                                                                tmp_coord2[1]))
+
 
     if by == 'columns':
         for i in range(coord1[0], coord2[0]+1):
-            tmp_cell_range=sheet1+"."+_digit_to_alpha(i)+str(coord1[1]+1)+":"+sheet2+"."+_digit_to_alpha(i)+str(coord2[1]+1)
+	    tmp_cell_range = sheet1 + "." + _digit_to_alpha(i) + \
+			     str(coord1[1]+1) + ":" + sheet2 + "." + \
+                             _digit_to_alpha(i) + str(coord2[1]+1)
+
             my_list.append(tmp_cell_range)
         return my_list
         
     elif by == 'rows':
         for i in range(coord1[1], coord2[1]+1):
-            tmp_cell_range=sheet1+"."+_digit_to_alpha(coord1[0])+str(i+1)+":"+sheet2+"."+_digit_to_alpha(coord2[0])+str(i+1)
+	    tmp_cell_range = sheet1 + "." + _digit_to_alpha(coord1[0]) + \
+			     str(i+1) + ":" + sheet2 + "." + \
+                             _digit_to_alpha(coord2[0]) + str(i+1) \
+
             my_list.append(tmp_cell_range)
         return my_list
 
@@ -829,7 +940,9 @@ def add_chart_structure_in_document(document):
     while not obj_created:
         name="Object "+str(i)
         if manifest.get_media_type(name+'/') is None:
-            manifest.add_full_path(name+'/', "application/vnd.oasis.opendocument.chart")
+	    manifest.add_full_path(name+'/',
+                                    "application/vnd.oasis.opendocument.chart")
+
             document.container.set_part(name+'/', '')
             obj_created = True
         else:
