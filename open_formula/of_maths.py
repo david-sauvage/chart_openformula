@@ -36,8 +36,11 @@ def __simple_function2(function, number1, number2):
        function -- str
        number -- Number or CellReference
    """
-   if type(function) is str and type(number1) in (Number, CellReference) and type(number2) in (Number, CellReference):
-      return function.upper()+"("+of_parameter_list(number1.str, number2.str)+")"
+   if (type(function) is str and type(number1) in (Number, CellReference) and 
+                                      type(number2) in (Number, CellReference)):
+      return function.upper()+"("+of_parameter_list(number1.str,
+                                                                number2.str)+")"
+
    else:
       raise TypeError, "Arguments must be Numbers or CellReferences"
 
@@ -73,8 +76,12 @@ def __round(function, number, count):
       else:
          raise TypeError, "Argument must be a Number or a CellReference"
    else:
-      if type(function) is str and type(number) in (Number, CellReference) and type(count) in (Number, CellReference):
-         return function.upper()+"("+of_parameter_list(number.str, count.str)+")"
+      if (type(function) is str and type(number) in (Number, CellReference) and 
+                                        type(count) in (Number, CellReference)):
+
+	 return function.upper()+"("+of_parameter_list(number.str,
+                                                                 count.str)+")"
+
       else:
          raise TypeError, "Arguments must be Numbers or CellReferences"
 
@@ -89,13 +96,22 @@ def __floor_ceil(function, number, significance, mode):
        mode -- None or Number or CellReference
    """
    if mode is None:
-      if type(function) is str and type(number) in (Number, CellReference) and type(significance) in (Number, CellReference):
-         return function.upper()+"("+of_parameter_list(number.str, significance.str)+")"
+      if (type(function) is str and type(number) in (Number, CellReference) and 
+                                type(significance) in (Number, CellReference)):
+
+	 return function.upper()+"("+of_parameter_list(number.str,
+                                                           significance.str)+")"
+
       else:
          raise TypeError, "Arguments must be Numbers or CellReferences"
    else:
-      if type(function) is str and type(number) in (Number, CellReference) and type(significance) in (Number, CellReference) and type(mode) in (Number, CellReference):
-         return function.upper()+"("+of_parameter_list(number.str, significance.str, mode.str)+")"
+      if (type(function) is str and type(number) in (Number, CellReference) and 
+			     type(significance) in (Number, CellReference) and 
+                                        type(mode) in (Number, CellReference)):
+
+	 return function.upper()+"("+of_parameter_list(number.str,
+                                                 significance.str, mode.str)+")"
+
       else:
          raise TypeError, "Arguments must be Numbers or CellReferences"
 
@@ -189,10 +205,14 @@ def of_countblank(cell_range):
 
 def of_countif(cells, criteria):
    """Return the syntax for a countif """
-   if type(cells) in (CellReference, RangeReference) and type(criteria) in (Number, CellReference, RangeReference, LogicalExpression, str):
+   if (type(cells) in (CellReference, RangeReference) and type(criteria) in 
+               (Number, CellReference, RangeReference, LogicalExpression, str)):
+
       return "COUNTIF("+cells.str+";"+criteria.str+")"
    else:
-      raise TypeError, "First argument has to be CellReference or RangeReference, second argument must be Number, CellReference, RangeReference"
+      raise TypeError, """First argument has to be CellReference or  
+			RangeReference, second argument must be Number,  
+                        CellReference, RangeReference"""
 
 def of_degrees(number):
     """
@@ -371,8 +391,14 @@ def of_seriessum(x, n, m, coeff):
     Return the syntax for a seriessum
     Gives the sum of a power series
     """
-    if type(x) in (Number, CellReference) and type(n) in (Number, CellReference) and type(m) in (Number, CellReference) and type(coeff) in (Number, CellReference, RangeReference):
-        return "SERIESSUM("+of_parameter_list(x.str, n.str, m.str, coeff.str)+")"
+    if (type(x) in (Number, CellReference) and  
+       type(n) in (Number, CellReference) and 
+       type(m) in (Number, CellReference) and 
+       type(coeff) in (Number, CellReference, RangeReference)):
+
+	return "SERIESSUM("+of_parameter_list(x.str, n.str, m.str,
+                                                                 coeff.str)+")"
+
     else:
         raise TypeError, "Wrong type of arguments"
 
@@ -406,12 +432,19 @@ def of_sum(*number_list):
 def of_sumif(cells, criteria, sum_range=None):
    """Return the syntax for a sumif """
    if sum_range is None:
-      if type(cells) in (CellReference, RangeReference) and type(criteria) in (Number, CellReference, RangeReference, LogicalExpression, str):
+      if (type(cells) in (CellReference, RangeReference) and 
+	 type(criteria) in (Number, CellReference, RangeReference,
+                                                       LogicalExpression, str)):
+
          return "SUMIF("+cells.str+";"+criteria.str+")"
       else:
          raise TypeError, "Wrong types of arguments"
    else:
-      if type(cells) in (CellReference, RangeReference) and type(criteria) in (Number, CellReference, RangeReference, LogicalExpression, str) and type(sum_range) in (CellReference, RangeReference):
+      if (type(cells) in (CellReference, RangeReference) and 
+	 type(criteria) in (Number, CellReference, RangeReference,
+                                                 LogicalExpression, str) and  
+         type(sum_range) in (CellReference, RangeReference)):
+
          return "SUMIF("+cells.str+";"+criteria.str+";"+sum_range.str+")"
       else:
          raise TypeError, "Wrong types of arguments"

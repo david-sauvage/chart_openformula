@@ -7,7 +7,8 @@ from re import compile, match
 from decimal import Decimal
 
 #Import from
-from of_class import Number, Cell, Range, CellReference, RangeReference, Column, Row
+from of_class import Number, Cell, Range, CellReference, RangeReference
+from of_class import Column, Row
 
 function_name_pattern = compile("^[A-Za-z_.1-9]*$")
 
@@ -121,26 +122,36 @@ def of_range_address(*args):
             return Range(".%s%s" % args)
         else:
             raise TypeError, "Arguments must be a Column and a Row"
+
     elif len(args) == 3:
         if type(args[1]) is Column and type(args[2]) is Row:
             return Range("%s.%s%s" % args)
         else:
             raise TypeError, "Arguments must be a sheet a Column and a Row"
+
     elif len(args) == 4:
-        if type(args[0]) is Column and type(args[1]) is Row and type(args[2]) is Column and type(args[3]) is Row:
+	if (type(args[0]) is Column and type(args[1]) is Row and type(args[2])
+                                           is Column and type(args[3]) is Row):
             return Range(".%s%s:.%s%s" % args)
         else:
             raise TypeError, "Arguments must be : Column, Row, Column, Row"
+
     elif len(args) == 5:
-        if type(args[1]) is Column and type(args[2]) is Row and type(args[3]) is Column and type(args[4]) is Row:
+	if (type(args[1]) is Column and type(args[2]) is Row and type(args[3])
+                                           is Column and type(args[4]) is Row):
             return Range("%s.%s%s:.%s%s" % args)
         else:
-            return TypeError, "Arguments must be : Sheet, Column, Row, Column, Row"
+            return TypeError, """Arguments must be : 
+                                 Sheet, Column, Row, Column, Row"""
+
     elif len(args) == 6:
-        if type(args[1]) is Column and type(args[2]) is Row and type(args[4]) is Column and type(args[5]) is Row:
+	if (type(args[1]) is Column and type(args[2]) is Row and type(args[4])
+                                            is Column and type(args[5]) is Row):
             return Range("%s.%s%s:%s.%s%s" % args)
         else:
-            return TypeError, "Arguments must be : Sheet, Column, Row, Sheet, Column, Row"
+            return TypeError, """Arguments must be : 
+                                 Sheet, Column, Row, Sheet, Column, Row"""
+
     raise ValueError, "Incorrect number of arguments"
 
 

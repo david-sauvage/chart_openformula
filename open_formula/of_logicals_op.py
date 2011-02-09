@@ -56,7 +56,9 @@ def of_if(test, then, otherwise):
         then --str or Number or CellReference
         otherwise --str or Number or CellReference
     """
-    if type(test) is LogicalExpression and type(then) in (Number, CellReference, str) and type(otherwise) in (Number, CellReference, str):
+    if type(test) is LogicalExpression and type(then) in (Number,
+       CellReference, str) and type(otherwise) in (Number, CellReference, str):
+
         expression = "IF("+test.str+";"
         if type(then)==str:
             expression = expression+then+";"
