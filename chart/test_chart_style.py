@@ -3,8 +3,8 @@ from unittest import TestCase, main
 
 from chart_style import odf_create_chart_style, odf_create_chart_title_style
 from chart_style import odf_create_chart_legend_style, odf_create_chart_plot_area_style
-from chart_style odf_create_chart_axis_style, odf_create_chart_axis_title_style
-from chart_style odf_create_chart_wall_style
+from chart_style import odf_create_chart_axis_style, odf_create_chart_axis_title_style
+from chart_style import odf_create_chart_wall_style
 
 class chart_style_test(TestCase):
 
