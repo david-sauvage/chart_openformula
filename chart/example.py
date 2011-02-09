@@ -25,7 +25,12 @@ chart_content = odf_xmlpart(chart_directory+'/content.xml', doc)
 styles =  chart_content.get_element("office:automatic-styles")
 
 #we add informations about style
-from chart_style import odf_create_chart_title_style, odf_create_chart_legend_style, odf_create_chart_plot_area_style, odf_create_chart_axis_style, odf_create_chart_axis_title_style, odf_create_chart_wall_style, odf_create_chart_style
+from chart_style import odf_create_chart_title_style
+from chart_style import odf_create_chart_legend_style
+from chart_style import odf_create_chart_plot_area_style
+from chart_style import odf_create_chart_axis_style
+from chart_style import odf_create_chart_axis_title_style
+from chart_style import odf_create_chart_wall_style, odf_create_chart_style
 
 styles.append(odf_create_chart_title_style("titre", "12pt"))
 plot_s=odf_create_chart_plot_area_style("plot")
@@ -35,7 +40,9 @@ styles.append(odf_create_chart_axis_style("axe y"))
 styles.append(odf_create_chart_wall_style("wall"))
 
 #we choose a color for each series
-palette=['#0000ff', '#bf00ff', '#ff0080', '#ff4000', '#ffff00', '#40ff00', '#00ff7f', '#00bfff', '#6000ff', '#ff00df', '#ff0020', '#ff9f00', '#9fff00', '#00ff20', '#00ffdf', '#0060ff']
+palette=['#0000ff', '#bf00ff', '#ff0080', '#ff4000', '#ffff00', '#40ff00',
+'#00ff7f', '#00bfff', '#6000ff', '#ff00df', '#ff0020', '#ff9f00', '#9fff00',
+'#00ff20', '#00ffdf', '#0060ff']
 
 from chart import divide_range
 cols_list = divide_range("Data.A1:Data.E5")
@@ -49,7 +56,9 @@ chart =  chart_content.get_element("office:body/office:chart")
 
 #we create our chart
 from chart import create_simple_chart
-c = create_simple_chart('line', 'Data.A1:Data.E5', 'Mon titre', data_in_columns=True)
+c = create_simple_chart('line', 'Data.A1:Data.E5', 'Mon titre',
+                                                         data_in_columns=True)
+
 a = c.get_element("chart:plot-area")
 
 #then we attach style informations with the element associated

@@ -6,7 +6,8 @@ import sys
 
 #import lpod
 from lpod.document import odf_new_document
-from lpod.table import odf_create_table, odf_create_row, odf_create_cell, _digit_to_alpha
+from lpod.table import odf_create_table, odf_create_row, odf_create_cell
+from lpod.table import _digit_to_alpha
 from lpod.xmlpart import odf_xmlpart
 
 #import lpod_vle
@@ -17,10 +18,13 @@ from lpod_chart.chart_style import odf_create_chart_axis_style
 from lpod_chart.chart_style import odf_create_chart_axis_title_style
 from lpod_chart.chart_style import odf_create_chart_wall_style
 from lpod_chart.chart_style import odf_create_chart_style
-from lpod_chart.chart import create_simple_chart, attach_chart_to_cell, divide_range
+from lpod_chart.chart import create_simple_chart, attach_chart_to_cell
+from lpod_chart.chart import divide_range
 from lpod_chart.chart import add_chart_structure_in_document
 
-palette=['#0000ff', '#bf00ff', '#ff0080', '#ff4000', '#ffff00', '#40ff00', '#00ff7f', '#00bfff', '#6000ff', '#ff00df', '#ff0020', '#ff9f00', '#9fff00', '#00ff20', '#00ffdf', '#0060ff']
+palette=['#0000ff', '#bf00ff', '#ff0080', '#ff4000', '#ffff00', '#40ff00',
+'#00ff7f', '#00bfff', '#6000ff', '#ff00df', '#ff0020', '#ff9f00', '#9fff00',
+'#00ff20', '#00ffdf', '#0060ff']
 
 ###
 #First step : we read the data and convert it the way it will give us the chart we want
@@ -58,7 +62,9 @@ if (len(sys.argv) > 2):
         minimum = 1000000.0
         index = 0
         for i in range(len(data)):
-            if data[i][0] != 'DD'and float(data[i][0]) < minimum and i not in line_read:
+	    if data[i][0] != 'DD'and float(data[i][0]) < minimum and i not in \
+                                                                   line_read:
+
                 minimum = float(data[i][0])
                 index = i
 
@@ -76,13 +82,17 @@ if (len(sys.argv) > 2):
         for i in places:
             tmp2.append(0)
 
-        tmp1[places_book[data[index][2]]] = beginning - places_status[data[index][2]]
+	tmp1[places_book[data[index][2]]] = beginning - \
+                                                 places_status[data[index][2]]
+
         result.append(tmp1)
         tmp2[places_book[data[index][2]]] = end - beginning
         result.append(tmp2)
 
         #we update the status
-        places_status[data[index][2]] = places_status[data[index][2]] + (beginning - places_status[data[index][2]])+(end - beginning)
+	places_status[data[index][2]] = places_status[data[index][2]] + \
+                   (beginning - places_status[data[index][2]])+(end - beginning)
+
         line_read.append(index)
 
 ###
