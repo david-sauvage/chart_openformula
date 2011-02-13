@@ -15,17 +15,23 @@ class TestOpenFormulaBasicsOp(unittest.TestCase):
 
     def test_of_substract(self):
         self.assertEqual(of_substract(CellReference("[.A1]")), "[.A1]")
-        self.assertEqual(of_substract(Number("2"), CellReference("[.D4]")), "2-[.D4]")
+	self.assertEqual(of_substract(Number("2"), CellReference("[.D4]")),
+                                                                      "2-[.D4]")
+
         self.assertRaises(TypeError, of_substract, 2)
    
     def test_of_multiply(self):
         self.assertEqual(of_multiply(CellReference("[.A1]")), "[.A1]")
-        self.assertEqual(of_multiply(Number("2"), CellReference("[.D4]")), "2*[.D4]")
+	self.assertEqual(of_multiply(Number("2"), CellReference("[.D4]")),
+                                                                      "2*[.D4]")
+
         self.assertRaises(TypeError, of_multiply, 2)
 
     def test_of_divide(self):
         self.assertEqual(of_divide(CellReference("[.A1]")), "[.A1]")
-        self.assertEqual(of_divide(Number("2"), CellReference("[.D4]")), "2/[.D4]")
+	self.assertEqual(of_divide(Number("2"), CellReference("[.D4]")),
+                                                                      "2/[.D4]")
+
         self.assertRaises(TypeError, of_divide, 2)
 
     def test_of_concatenate(self):

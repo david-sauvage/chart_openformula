@@ -2,10 +2,10 @@ import unittest
 
 from decimal import Decimal
 from of_class import Number, Cell, Range
-from of_syntax import of_formula, of_intro, of_number, of_string, of_function_name
-from of_syntax import of_parameter_list, of_reference, of_column, of_row, of_source
-from of_syntax import of_range_address, of_reference_list, of_array, of_matrix_row
-
+from of_syntax import of_formula, of_intro, of_number, of_string
+from of_syntax import of_parameter_list, of_reference, of_column, of_row
+from of_syntax import of_range_address, of_reference_list, of_array
+from of_syntax import of_function_name, of_source, of_matrix_row
 class TestOpenFormulaSyntax(unittest.TestCase):
     
 #Syntax test
@@ -39,15 +39,21 @@ class TestOpenFormulaSyntax(unittest.TestCase):
         self.assertRaises(TypeError, of_function_name, 5)
 
     def test_of_parameter_list(self):
-        self.assertEqual(of_parameter_list("abc", "def", "ghi"), "abc ; def ; ghi")
+	self.assertEqual(of_parameter_list("abc", "def", "ghi"), 
+                                                           "abc ; def ; ghi")
+
         self.assertEqual(of_parameter_list("abc", "", "ghi"), "abc ;  ; ghi")
         self.assertEqual(of_parameter_list("abc"), "abc")
         self.assertRaises(TypeError, of_parameter_list, "abc", 2, "def")
 
     def test_of_reference(self):
         expected="['src'# address]"
-        self.assertEqual(of_reference(Cell("address"), of_source("src")).str, expected)
-        self.assertEqual(of_reference(Range("address"), of_source("src")).str, expected)
+	self.assertEqual(of_reference(Cell("address"), of_source("src")).str,
+                                                                      expected)
+
+	self.assertEqual(of_reference(Range("address"), of_source("src")).str,
+                                                                      expected)
+
         self.assertRaises(TypeError, of_reference, Number("address"))
 
     def test_of_column(self):
@@ -69,24 +75,31 @@ class TestOpenFormulaSyntax(unittest.TestCase):
 
     def test_of_range_address(self):
         expected=".AA11"
-        self.assertEqual(of_range_address(of_column("AA"), of_row(11)).str, expected)
+	self.assertEqual(of_range_address(of_column("AA"), of_row(11)).str,
+                                                                      expected)
         
         expected="sheet.AA11"
-        self.assertEqual(of_range_address("sheet", of_column("AA"), of_row(11)).str, expected)
+	self.assertEqual(of_range_address("sheet", of_column("AA"),
+                                                     of_row(11)).str, expected)
         
         expected=".AA11:.BB22"
-        self.assertEqual(of_range_address(of_column("AA"), of_row(11), of_column("BB"), of_row(22)).str, expected)
+	self.assertEqual(of_range_address(of_column("AA"), of_row(11),
+                                    of_column("BB"), of_row(22)).str, expected)
         
         expected="sheet.AA11:sheet2.BB22"
-        self.assertEqual(of_range_address("sheet", of_column("AA"), of_row(11),"sheet2", of_column("BB"), of_row(22)).str, expected)
+	self.assertEqual(of_range_address("sheet", of_column("AA"),
+               of_row(11),"sheet2", of_column("BB"), of_row(22)).str, expected)
         
         expected=".AA11:.BB22"
-        self.assertEqual(of_range_address(of_column("AA"), of_row(11), of_column("BB"), of_row(22)).str, expected)
+	self.assertEqual(of_range_address(of_column("AA"), of_row(11),
+                                    of_column("BB"), of_row(22)).str, expected)
 
         self.assertRaises(TypeError, of_range_address,"A", 1)
 
     def test_of_reference_list(self):
-        self.assertEqual(of_reference_list("abc", "def", "ghi"), "abc ~ def ~ ghi")
+	self.assertEqual(of_reference_list("abc", "def", "ghi"), 
+                                                             "abc ~ def ~ ghi")
+
         self.assertEqual(of_reference_list("abc"), "abc")
         self.assertRaises(TypeError, of_reference_list, "abc", 2, "def")
 
